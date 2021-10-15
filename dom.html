@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>JS DOM example</title>
+</head>
+<body>
+	<h1>DOM example</h1>
+	<button onclick="sayHello()">Click Me!</button>
+	<hr>
+	<input type="text" name="name" id="name" placeholder="Enter your name">
+	<button onclick="sayGoodbye()" id="goodbyebtn">Click me again!</button>
+	<button onclick="activatePressed()" id="deactivatebtn">Deactivate button</button>
+	<p id="message"></p>
+	<hr>
+	<h3>My to do list</h3>
+	<input type="text" name="todo" id="todo" placeholder="Enter new item">
+	<button onclick="addClicked()">Add new Item</button>
+	<ul id="listUl">
+
+	</ul>
+
+	<hr>
+	<h3>My address book</h3>
+	<input type="text" name="friendname" id="friendname" placeholder="Enter friend name">
+	<input type="phone" name="friendphone" id="friendphone" placeholder="Enter your friend phone number">
+	<input type="email" name="friendemail" id="friendemail" placeholder="Enter your friend email">
+	<button onclick="addPhoneClicked()">Add inside phonebook</button>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Phone</th>
+				<th>Address</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody id=list>
+
+		</tbody>
+	</table>
+</body>
+<script type="text/javascript">
+
+/*
+<tbody>
+<tr>
+<td>Name</td>
+<td>Phone</td>
+<td>Address</td>
+<td><button>Delete row</button></td>
+</tr>
+<tbody>
+*/
+
+function addPhoneClicked(){
+		//1) Get the name, phone and address entered by user inside the inputs (3 lines)
+		var name=document.getElementById("friendname").value;
+		var phone=document.getElementById("friendphone").value;
+		var email=document.getElementById("friendemail").value;
+		//2) Create three new td elements (3 lines)
+		var td1=document.createElement("td");
+		var td2=document.createElement("td");
+		var td3=document.createElement("td");
+		var td4=document.createElement("td");
+		//3) Create a tr element (1 line)
+		var newtr=document.createElement("tr");
+		//4) Add the name, phone and address into td
+		td1.innerHTML=name;
+		td2.innerHTML=phone;
+		td3.innerHTML=email;
+		//5) Append the three td elements into the new tr (3 lines)
+		newtr.appendChild(td1);
+		newtr.appendChild(td2);
+		newtr.appendChild(td3);
+
+		//Create button
+		var newbutton=document.createElement("button");
+		newbutton.innerHTML="Delete Contact"
+		newbutton.addEventListener("click",function(){
+			document.getElementById("list").removeChild(newtr);
+		})
+		td4.appendChild(newbutton)
+		newtr.appendChild(td4);
+		//6) Append the tr element into the tbody (1 line)
+		document.getElementById("list").appendChild(newtr);
+	}
+
+/*
+<ul>
+<li>Item 1</li>
+<li>Item 2</li>
+<li>Item 3</li>
+</ul>
+*/
+
+function addClicked(){
+		//1) Get the item added by user inside inputs
+		var newItem=document.getElementById("todo").value;
+		//2) Create a new li element
+		var newLi=document.createElement("li");
+		//3) Add 1 into the new li element
+		newLi.innerHTML=newItem;
+		var newBtn=document.createElement("button");
+		newBtn.innerHTML="Delete";
+		newLi.appendChild(newBtn);
+		newBtn.addEventListener("click",function(){
+			document.getElementById("listUl").removeChild(newLi);
+		})
+		//4) Append li to ul (listUl)
+		document.getElementById("listUl").appendChild(newLi);
+	}
+
+	function activatePressed(){
+		//If the button is deactivated = activate it == Activate Button
+		//If the button is activated = deactivate it == Deactivate Button
+
+		if (document.getElementById("goodbyebtn").disabled == true){
+			document.getElementById("goodbyebtn").removeAttribute("disabled");
+			document.getElementById("deactivatebtn").innerHTML = "Deactivate Button";
+		//Change the label of the button
+	}
+	else{
+		document.getElementById("goodbyebtn").setAttribute("disabled",true);
+		document.getElementById("deactivatebtn").innerHTML="Activate Button";
+		//Change the label of the button
+	}
+}
+
+function sayHello(){
+	alert("Hello");
+}
+
+function sayGoodbye(){
+		//Retrieve the value from input of id name
+		var name=document.getElementById("name").value;
+		alert("Goodbye "+name);
+
+	//Writing it on p of id messages
+	document.getElementById("message"). innerHTML="Hello "+name + " another message here!";
+}
+</script>
+</html>
